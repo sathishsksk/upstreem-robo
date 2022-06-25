@@ -56,8 +56,8 @@ def stats(update, context):
             f'<b>├  🎮 RAM : {mem_p}%</b>\n' \
             f'<b>├  💽 DISK : {disk}%</b>\n' \
             f'<b>│</b>\n' \
-            f'<b>╰──「 🚸 @sk_mass_king 🚸 」</b>'
-    sendMessage.reply_photo('https://pbs.twimg.com/profile_banners/1003909132796116992/1607060050/1500x500', stats, context.bot, update.message)
+            f'<b>╰──「 🚸 @sk_mass_king 'https://pbs.twimg.com/profile_banners/1003909132796116992/1607060050/1500x500' 🚸 」</b>'
+    sendMessage(stats, context.bot, update.message)
 
     
     
