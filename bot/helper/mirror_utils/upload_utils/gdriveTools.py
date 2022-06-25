@@ -17,7 +17,7 @@ from tenacity import retry, wait_exponential, stop_after_attempt, retry_if_excep
 
 from bot.helper.telegram_helper.button_build import ButtonMaker
 from bot import parent_id, DOWNLOAD_DIR, IS_TEAM_DRIVE, INDEX_URL, USE_SERVICE_ACCOUNTS, VIEW_LINK, \
-                DRIVES_NAMES, DRIVES_IDS, INDEX_URLS, EXTENSION_FILTER
+                DRIVES_NAMES, DRIVES_IDS, SHORTENER, SHORTENER_API, INDEX_URLS, EXTENSION_FILTER
 from bot.helper.ext_utils.telegraph_helper import telegraph
 from bot.helper.ext_utils.bot_utils import get_readable_file_size, setInterval
 from bot.helper.ext_utils.fs_utils import get_mime_type, get_path_size
@@ -359,12 +359,30 @@ class GoogleDriveHelper:
                     url_path = rquote(f'{meta.get("name")}', safe='')
                     url = f'{INDEX_URL}/{url_path}/'
                     buttons.buildbutton("⚡ Index Link", url)
+                    if SHORTENER is not None and SHORTENER_API is not None:
+                    surl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={durl}&format=text').text
+                    buttons.buildbutton("🌠 Drive Link 🌠", surl)
+                else:
+                    buttons.buildbutton("🌠 Drive Link 🌠", durl)
+                if INDEX_URL is not None:
+                    url_path = requests.utils.quote(f'{meta.get("name")}')
+                    url = f'{INDEX_URL}/{url_path}/'
+                    if SHORTENER is not None and SHORTENER_API is not None:
+                        siurl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={url}&format=text').text
+                        buttons.buildbutton("☄️ Index Link ☄️", siurl)
+                    else:
+                        buttons.buildbutton("☄️ Index Link ☄️", url)
             else:
                 file = self.__copyFile(meta.get('id'), parent_id)
-                msg += f'<b>Name: </b><code>{file.get("name")}</code>'
+                msg += f'<b>Name:/ </b><code>{file.get("name")}</code>'
                 durl = self.__G_DRIVE_BASE_DOWNLOAD_URL.format(file.get("id"))
                 buttons = ButtonMaker()
                 buttons.buildbutton("☁️ Drive Link", durl)
+                 if SHORTENER is not None and SHORTENER_API is not None:
+                    surl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={durl}&format=text').text
+                    buttons.buildbutton("🌠 Drive Link 🌠", surl)
+                else:
+                    buttons.buildbutton("🌠 Drive Link 🌠", durl)
                 if mime_type is None:
                     mime_type = 'File'
                 msg += f'\n<b>☞ 📦Size : </b><code>{get_readable_file_size(int(meta.get("size")))}</code>'
@@ -373,9 +391,16 @@ class GoogleDriveHelper:
                     url_path = rquote(f'{file.get("name")}', safe='')
                     url = f'{INDEX_URL}/{url_path}'
                     buttons.buildbutton("⚡ Index Link", url)
+                    if SHORTENER is not None and SHORTENER_API is not None:
+                        siurl = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={url}&format=text').text
+                        siurls = requests.get(f'https://{SHORTENER}/api?api={SHORTENER_API}&url={urls}&format=text').text
+                        buttons.buildbutton("☄️ Index Link ☄️", siurl)
                     if VIEW_LINK:
-                        urlv = f'{INDEX_URL}/{url_path}?a=view'
-                        buttons.buildbutton("🌐 View Link", urlv)
+                            buttons.buildbutton(" View Link", siurls)
+                    else:
+                        buttons.buildbutton("☄️ Index Link ☄️", url)
+                        if VIEW_LINK:
+                            buttons.buildbutton(" View Link", urls)
         except Exception as err:
             if isinstance(err, RetryError):
                 LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
