@@ -375,7 +375,7 @@ class GoogleDriveHelper:
                     buttons.buildbutton("⚡ Index Link ⚡", url)
                     if VIEW_LINK:
                         urlv = f'{INDEX_URL}/{url_path}?a=view'
-                        buttons.buildbutton("🌐 View Link", urlv)
+                        buttons.buildbutton("🔥 View Link 🔥", urlv)
         except Exception as err:
             if isinstance(err, RetryError):
                 LOGGER.info(f"Total Attempts: {err.last_attempt.attempt_number}")
