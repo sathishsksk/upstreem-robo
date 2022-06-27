@@ -218,19 +218,19 @@ class MirrorListener:
                 msg += f'\n<b>☞ 🗂Files: </b>{files}'
             msg += f'\n\n<b>cc: </b>☄{self.tag}☄'
             buttons = ButtonMaker()
-            buttons.buildbutton("☁️ Drive Link", link)
+            buttons.buildbutton("🌠 Drive Link 🌠", link)
             LOGGER.info(f'Done Uploading {name}')
             if INDEX_URL is not None:
                 url_path = rutils.quote(f'{name}')
                 share_url = f'{INDEX_URL}/{url_path}'
                 if ospath.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{name}'):
                     share_url += '/'
-                    buttons.buildbutton("⚡ Index Link", share_url)
+                    buttons.buildbutton("⚡ Index Link ⚡", share_url)
                 else:
-                    buttons.buildbutton("⚡ Index Link", share_url)
+                    buttons.buildbutton("⚡ Index Link ⚡", share_url)
                     if VIEW_LINK:
                         share_urls = f'{INDEX_URL}/{url_path}?a=view'
-                        buttons.buildbutton("🌐 View Link", share_urls)
+                        buttons.buildbutton("🔥 View Link 🔥", share_urls)
             sendMarkup(msg, self.bot, self.message, InlineKeyboardMarkup(buttons.build_menu(2)))
             if self.isQbit and QB_SEED and not self.extract:
                 if self.isZip:
