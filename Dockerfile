@@ -1,4 +1,4 @@
-FROM sathishsk/slamo:latest
+FROM sathishsk/slamoffl:latest
 
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
