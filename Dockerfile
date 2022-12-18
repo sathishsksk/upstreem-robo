@@ -1,4 +1,4 @@
-FROM sathishsk/upstreem:latest
+FROM sathishsk/slam:latest
 
 WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
