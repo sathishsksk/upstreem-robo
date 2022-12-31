@@ -181,7 +181,7 @@ def aria2c_init():
 Thread(target=aria2c_init).start()
 
 MEGA_KEY = environ.get('MEGA_API_KEY', '')
-if len(MEGA_API_KEY) == 0:
+if len(MEGA_KEY) == 0:
     log_warning('MEGA API KEY not provided!')
     MEGA_KEY = ''
 
