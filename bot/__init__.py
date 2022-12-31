@@ -329,7 +329,7 @@ except:
 try:
     CUSTOM_FILENAME = getConfig('CUSTOM_FILENAME')
     if len(CUSTOM_FILENAME) == 0:
-        tryraise KeyError
+        raise KeyError
 except:
     CUSTOM_FILENAME = None
 try:
