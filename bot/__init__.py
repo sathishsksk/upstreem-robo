@@ -180,33 +180,17 @@ def aria2c_init():
         log_error(f"Aria2c initializing error: {e}")
 Thread(target=aria2c_init).start()
 
-try:
-    MEGA_KEY = getConfig('MEGA_API_KEY')
-    if len(MEGA_KEY) == 0:
-        raise KeyError
-except:
-    MEGA_KEY = None
-    LOGGER.info('MEGA_API_KEY not provided!')
-if MEGA_KEY is not None:
-    # Start megasdkrest binary
-    
-    sleep(3)  # Wait for the mega server to start listening
-    mega_client = MegaSdkRestClient('http://localhost:6090')
-    try:
-        MEGA_USERNAME = getConfig('MEGA_EMAIL_ID')
-        MEGA_PASSWORD = getConfig('MEGA_PASSWORD')
-        if len(MEGA_USERNAME) > 0 and len(MEGA_PASSWORD) > 0:
-            try:
-                mega_client.login(MEGA_USERNAME, MEGA_PASSWORD)
-            except mega_err.MegaSdkRestClientException as e:
-                log_error(e.message['message'])
-                exit(0)
-        else:
-            log_info("Mega API KEY provided but credentials not provided. Starting mega in anonymous mode!")
-    except:
-        log_info("Mega API KEY provided but credentials not provided. Starting mega in anonymous mode!")
-else:
-    sleep(1.5)
+MEGA_KEY = environ.get('MEGA_API_KEY', '')
+if len(MEGA_API_KEY) == 0:
+    log_warning('MEGA API KEY not provided!')
+    MEGA_KEY = ''
+
+MEGA_EMAIL_ID = environ.get('MEGA_EMAIL_ID', '')
+MEGA_PASSWORD = environ.get('MEGA_PASSWORD', '')
+if len(MEGA_EMAIL_ID) == 0 or len(MEGA_PASSWORD) == 0:
+    log_warning('MEGA Credentials not provided!')
+    MEGA_EMAIL_ID = ''
+    MEGA_PASSWORD = ''
 
 try:
     BASE_URL = getConfig('BASE_URL_OF_BOT').rstrip("/")
