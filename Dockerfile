@@ -1,3 +1,3 @@
 FROM sathishsk/music:latest
 
-CMD ["python3", "bot.py"]
+CMD ["python3 -m bot"]
