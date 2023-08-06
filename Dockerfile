@@ -1,5 +1,5 @@
 FROM sathishsk/fslink:latest
 
-COPY ..
+COPY .
 
 CMD ["bash","start.sh"]
