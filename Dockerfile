@@ -1,3 +1,3 @@
 FROM sathishsk/fslink:latest
 
-CMD ["python -m Adarsh"]
+CMD ["bash","start.sh"]
