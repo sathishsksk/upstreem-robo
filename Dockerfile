@@ -1,4 +1,4 @@
-FROM sathishsk/fslink:latest
+FROM sathishsk/spotify:latest
 
 COPY . .
 
