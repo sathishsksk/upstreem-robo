@@ -1,4 +1,4 @@
-FROM sathishsk/spotify:latest
+FROM sathishsk/wednessday:latest
 
 COPY . .
 
