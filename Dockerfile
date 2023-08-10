@@ -1,4 +1,4 @@
-FROM sathishsk/wednessday:latest
+FROM sathishsk/lightmltb:latest
 
 COPY . .
 
