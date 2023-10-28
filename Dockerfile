@@ -1,4 +1,4 @@
-FROM sathishsk/lightmltb:latest
+FROM sathishsk/tl:latest
 
 COPY . .
 
