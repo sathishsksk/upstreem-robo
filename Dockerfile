@@ -1,4 +1,4 @@
-FROM sathishsk/tl:latest
+FROM sathishsk/luna:latest
 
 COPY . .
 
