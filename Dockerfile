@@ -2,6 +2,6 @@ FROM sathishsk/tl:latest
 
 COPY . .
 
-EXPOSE <port>
+EXPOSE <8080>
 
 CMD ["bash","start.sh"]
